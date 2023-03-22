@@ -19,10 +19,10 @@
                         @csrf
                         <div class="form-group">
                             <label class="control-label" for="name">Usuario</label>
-                            <input type="text" placeholder="Usuario" title="Por favor ingresa tu usuario" required="" value="{{ old('name') }}" name="name" id="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" autofocus>
-                            @if ($errors->has('name'))
+                            <input type="text" placeholder="Usuario" title="Por favor ingresa tu usuario" required="" value="{{ old('email') }}" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" autofocus>
+                            @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
                             <span class="help-block small">Ingresa tu correo</span>

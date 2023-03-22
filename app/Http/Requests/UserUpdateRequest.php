@@ -24,7 +24,8 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-          'name' => 'unique:users,name,'.$this->user->id,
+            'name' => 'unique:users,name,' . $this->user->id,
+            'email' => 'unique:users,email,' . $this->user->id,
         ];
     }
 
@@ -32,6 +33,7 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name.unique' => 'Ese nombre de usuario no esta disponible.',
+            'email.unique' => 'Ese correo no esta disponible.',
         ];
     }
 }

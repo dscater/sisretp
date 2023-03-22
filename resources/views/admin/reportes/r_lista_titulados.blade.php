@@ -98,7 +98,7 @@
             @foreach($titulados as $key => $value)
             <tr>
                 <td>{{ $contador++ }}</td>
-                <td class='izquierda'>{{ $value->nom }} {{ $value->apep }} {{ $value->apem }}</td>
+                <td class='izquierda'>{{ $value->paterno_nombre }}</td>
                 <td>{{ $value->ci }} {{ $value->ci_exp }}</td>
                 <td>{{ $value->genero == 'M'? 'MASCULINO':'FEMENINO' }}</td>
                 <td>{{ $value->fono? :'*******'  }} - {{ $value->cel }}</td>

@@ -6,6 +6,7 @@ use sisretp\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use sisretp\Empresa;
+
 class LoginController extends Controller
 {
     /*
@@ -41,11 +42,11 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $empresa = Empresa::first();
-        return view('auth.login',compact('empresa'));
+        return view('auth.login', compact('empresa'));
     }
 
     public function username()
     {
-        return 'name';
+        return 'email';
     }
 }

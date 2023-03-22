@@ -1,7 +1,9 @@
+let sw_envia = true;
+let errores = [];
 $(document).ready(function () {
 });
 
-function crear(){
+function crear() {
     var form = $('#demo1-upload');
     var str = new FormData(form[0]);
     var url = form.attr('action');
@@ -10,41 +12,117 @@ function crear(){
     //             }
     console.log(url);
     console.log('SUBIENDO...');
-    $.ajax({
-        cache: false,
-        processData: false, 
-        contentType: false,
-        type: "post",
-        url: url,
-        data: str,
-        dataType: "json",
-        success: function (response) {
-            console.log(response.msg);
-            window.location.href = $('#url_home').val()+"?sw=inicio";
+
+    // agregar titulos
+    let h_titulos = $("#contenedor_titulos").find('input[name="input_titulo[]"]');
+    h_titulos.each(function (index) {
+        if ($(this).get(0).files[0]) {
+            str.append("titulo" + index, $(this).get(0).files[0]);
+        } else {
+            str.append("titulo" + index, "");
         }
     });
+
+    // agregar diplomas
+    let h_diplomas = $("#contenedor_postgrados").find('input[name="input_diploma[]"]');
+    console.log(h_diplomas.length);
+    h_diplomas.each(function (index) {
+        if ($(this).get(0).files[0]) {
+            str.append("diploma" + index, $(this).get(0).files[0]);
+        } else {
+            str.append("diploma" + index, "");
+        }
+    });
+
+    if (sw_envia) {
+        $.ajax({
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: "post",
+            url: url,
+            data: str,
+            dataType: "json",
+            success: function (response) {
+                console.log(response.msg);
+                // window.location.href = $('#url_home').val() + "?sw=inicio";
+            }
+        });
+    }
 }
 
-function actualizar(){
+function actualizar() {
     var form = $('#demo1-upload');
     var str = new FormData(form[0]);
     var url = form.attr('action');
     // for (var pair of str.entries()) {
     //                 console.log(pair[0]+ ', ' + pair[1]); 
     //             }
-    console.log(url);
-    console.log('ACTUALIZANDO...');
-    $.ajax({
-        cache: false,
-        processData: false, 
-        contentType: false,
-        type: "post",
-        url: url,
-        data: str,
-        dataType: "json",
-        success: function (response) {
-            console.log(response.msg);
-            window.location.href = $('#url_edit').val()+"?sw=update";
+
+    // agregar titulos
+    let h_titulos = $("#contenedor_titulos").find('input[name="input_titulo[]"]');
+    h_titulos.each(function (index) {
+        if ($(this).get(0).files[0]) {
+            str.append("titulo" + index, $(this).get(0).files[0]);
+        } else {
+            str.append("titulo" + index, "");
         }
     });
+
+    // agregar diplomas
+    let h_diplomas = $("#contenedor_postgrados").find('input[name="input_diploma[]"]');
+    console.log(h_diplomas.length);
+    h_diplomas.each(function (index) {
+        if ($(this).get(0).files[0]) {
+            str.append("diploma" + index, $(this).get(0).files[0]);
+        } else {
+            str.append("diploma" + index, "");
+        }
+    });
+
+    if (sw_envia) {
+        $.ajax({
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: "post",
+            url: url,
+            data: str,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                window.location.href = $('#url_edit').val() + "?sw=update";
+            }
+        });
+    } else {
+    }
+
+}
+
+function validaRequeridos() {
+    sw_envia = true;
+    errores = [];
+    let requeridos = $("#contenedor_titulos").find('[required]');
+    requeridos.each(function (index) {
+        if ($(this).val() == "" || !$(this).val()) {
+            sw_envia = false;
+            errores.push($(this).attr("name"));
+            $(this).addClass("invalid");
+        } else {
+            $(this).removeClass("invalid");
+        }
+    });
+
+    let requeridos_postgrados = $("#contenedor_postgrados").find('[required]');
+    requeridos_postgrados.each(function (index) {
+        if ($(this).val() == "" || !$(this).val()) {
+            sw_envia = false;
+            errores.push($(this).attr("name"));
+            $(this).addClass("invalid");
+        } else {
+            $(this).removeClass("invalid");
+        }
+    });
+
+    console.log(errores);
 }

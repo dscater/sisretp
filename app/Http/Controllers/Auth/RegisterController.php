@@ -2,6 +2,7 @@
 
 namespace sisretp\Http\Controllers\Auth;
 
+use Exception;
 use sisretp\User;
 use sisretp\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Mail;
 use sisretp\Empresa;
+
 class RegisterController extends Controller
 {
     /*
@@ -45,7 +47,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $empresa = Empresa::first();
-        return view('auth.register',compact('empresa'));
+        return view('auth.register', compact('empresa'));
     }
 
     /**
@@ -58,7 +60,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'confirmed'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -80,13 +82,18 @@ class RegisterController extends Controller
             'status' => 0
         ]);
 
-        $data['usuario_id'] = $usuario->id;
-        $data['email'] = $usuario->email;
-        Mail::send('mails.confirma_correo',$data,function($msj) use($data){
-            $msj->from('syseventos@gmail.com', 'SISRETP');
-            $msj->subject('Confirmar correo');
-            $msj->to($data['email']);
-        });
+        try {
+            $data['usuario_id'] = $usuario->id;
+            $data['email'] = $usuario->email;
+            Mail::send('mails.confirma_correo', $data, function ($msj) use ($data) {
+                $msj->from('syseventos@gmail.com', 'SISRETP');
+                $msj->subject('Confirmar correo');
+                $msj->to($data['email']);
+            });
+        } catch (Exception $e) {
+            $usuario->status = 1;
+            $usuario->save();
+        }
 
         return $usuario;
     }

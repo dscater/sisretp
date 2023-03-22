@@ -83,6 +83,7 @@
                                 <th>N°</th>
                                 <th>Foto</th>
                                 <th>Código</th>
+                                <th>Email</th>
                                 <th>Nombres y apellidos</th>
                                 <th>C.I.</th>
                                 <th>Teléfono - Celular</th>
@@ -95,6 +96,7 @@
                                 <td>1</td>
                                 <td><img src="{{asset('imgs/personal/'.$value->foto)}}" alt=""></td>
                                 <td>{{$value->user->name}}</td>
+                                <td>{{$value->user->email}}</td>
                                 <td>{{$value->nom}} {{$value->apep}} {{$value->apem}}</td>
                                 <td>{{$value->ci}} {{$value->ci_exp}}</td>
                                 <td>{{$value->fono? :'********'}} - {{$value->cel}}</td>

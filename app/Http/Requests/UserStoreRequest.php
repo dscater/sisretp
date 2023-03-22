@@ -24,7 +24,8 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-          'name' => 'unique:users,name',
+            'name' => 'unique:users,name',
+            'email' => 'unique:users,name'
         ];
     }
 
@@ -32,6 +33,7 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'name.unique' => 'Ese nombre de usuario no esta disponible.',
+            'email.unique' => 'Ese correo no esta disponible.',
         ];
     }
 }
