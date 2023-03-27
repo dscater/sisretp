@@ -27,7 +27,7 @@
                     @csrf
                         <div class="row">
                             <div class="form-group col-lg-12">
-                                <label>Usuario</label>
+                                <label>Nombre de usuario</label>
                                 <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">

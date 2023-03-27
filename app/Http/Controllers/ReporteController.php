@@ -91,7 +91,11 @@ class ReporteController extends Controller
         $empresa = Empresa::first();
         $titulados = Titulado::orderBy('apep', 'ASC')->get();
         if ($filtro != 'TODOS') {
-            $titulados = Titulado::where("id", $request->titulado)->orderBy('nom', 'ASC')->get();
+            if ($request->titulado != 'TODOS') {
+                $titulado = Titulado::find($request->titulado);
+                $pdf = PDF::loadView('admin.reportes.r_titulado_individual', compact('empresa', 'titulado'));
+                return $pdf->stream('ListaTitulados.pdf');
+            }
         }
 
         $pdf = PDF::loadView('admin.reportes.r_lista_titulados', compact('empresa', 'titulados'));

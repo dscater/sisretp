@@ -206,7 +206,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    {{-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                         <div class="address-hr biography">
                                                             <p><b>CARRERA</b><br /> {{ $titulo->carrera->nom }}
                                                             </p>
@@ -223,7 +223,7 @@
                                                             <p><b>TÍTULO PROFESIONAL</b><br />
                                                                 {{ $titulo->titulo_prof }}</p>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <a href="{{ route('titulados.descargar_pdf', $titulado->id) }}"
                                                             class="btn btn-success"><i class="fa fa-download"></i>

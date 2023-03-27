@@ -18,8 +18,8 @@
                     <form method="POST" action="{{ route('login') }}" id="loginForm">
                         @csrf
                         <div class="form-group">
-                            <label class="control-label" for="name">Usuario</label>
-                            <input type="text" placeholder="Usuario" title="Por favor ingresa tu usuario" required="" value="{{ old('email') }}" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" autofocus>
+                            <label class="control-label" for="name">Correo electrónico</label>
+                            <input type="text" placeholder="Correo electrónico" title="Por favor ingresa tu correo" required="" value="{{ old('email') }}" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" autofocus>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('email') }}</strong>

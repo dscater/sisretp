@@ -45,7 +45,7 @@ function crear() {
             dataType: "json",
             success: function (response) {
                 console.log(response.msg);
-                // window.location.href = $('#url_home').val() + "?sw=inicio";
+                window.location.href = $('#url_home').val() + "?sw=inicio";
             }
         });
     }
