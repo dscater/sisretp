@@ -2,7 +2,7 @@
 
 @section('css')
     <!-- notifications CSS
-                            ============================================ -->
+                                    ============================================ -->
     <link rel="stylesheet" href="{{ asset('kiaalap-master/css/notifications/Lobibox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('kiaalap-master/css/notifications/notifications.css') }}">
     <link rel="stylesheet" href="{{ asset('recursos_vistas/jquery-steps-master/demo/css/normalize.css') }}">
@@ -89,8 +89,8 @@
         }
 
         /* ul[role="tablist"] li{
-                                height: 40px;
-                            } */
+                                        height: 40px;
+                                    } */
         .wizard>.steps .current a,
         .wizard>.steps .current a:hover,
         .wizard>.steps .current a {
@@ -193,12 +193,12 @@
 
 @section('scripts')
     <!-- notification JS
-                            ============================================ -->
+                                    ============================================ -->
     <script src="{{ asset('kiaalap-master/js/notifications/Lobibox.js') }}"></script>
     {{-- <script src="{{asset('js/notifications/notification-active.js')}}"></script> --}}
 
     <!-- form validate JS
-                            ============================================ -->
+                                    ============================================ -->
     <script src="{{ asset('kiaalap-master/js/form-validation/jquery.form.min.js') }}"></script>
     <script src="{{ asset('kiaalap-master/js/form-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('kiaalap-master/js/form-validation/form-active.js') }}"></script>
@@ -532,6 +532,34 @@
 
         function agregarEliminadoPostgrado(id) {
             $("#eliminados_postgrados").append(`<input type="hidden" name="eliminados_postgrado[]" value="${id}">`);
+        }
+
+        function validaRequeridos() {
+            sw_envia = true;
+            errores = [];
+            let requeridos = $("#contenedor_titulos").find('[required]');
+            requeridos.each(function(index) {
+                if ($(this).val() == "" || !$(this).val()) {
+                    sw_envia = false;
+                    errores.push($(this).attr("name"));
+                    $(this).addClass("invalid");
+                } else {
+                    $(this).removeClass("invalid");
+                }
+            });
+
+            let requeridos_postgrados = $("#contenedor_postgrados").find('[required]');
+            requeridos_postgrados.each(function(index) {
+                if ($(this).val() == "" || !$(this).val()) {
+                    sw_envia = false;
+                    errores.push($(this).attr("name"));
+                    $(this).addClass("invalid");
+                } else {
+                    $(this).removeClass("invalid");
+                }
+            });
+
+            console.log(errores);
         }
     </script>
 @endsection
