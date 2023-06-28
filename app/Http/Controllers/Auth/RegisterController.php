@@ -8,7 +8,7 @@ use sisretp\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Support\Facades\Log;
 use Mail;
 use sisretp\Empresa;
 
@@ -86,11 +86,14 @@ class RegisterController extends Controller
             $data['usuario_id'] = $usuario->id;
             $data['email'] = $usuario->email;
             Mail::send('mails.confirma_correo', $data, function ($msj) use ($data) {
-                $msj->from('syseventos@gmail.com', 'SISRETP');
+                $msj->from('factura@webfactu.com', 'SISRETP');
                 $msj->subject('Confirmar correo');
                 $msj->to($data['email']);
             });
-        } catch (Exception $e) {
+            Log::debug("envio");
+        } catch (\Exception $e) {
+            Log::debug("no envio");
+            Log::debug("error: " . $e->getMessage());
             $usuario->status = 1;
             $usuario->save();
         }

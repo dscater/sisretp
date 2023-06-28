@@ -224,38 +224,38 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>País*</label>
-                                {{ Form::text('pais[]', $postgrado->pais, ['class' => 'form-control', 'placeholder' => 'País*', 'required']) }}
+                                <label>País</label>
+                                {{ Form::text('pais[]', $postgrado->pais, ['class' => 'form-control', 'placeholder' => 'País']) }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Universidad*</label>
-                                {{ Form::text('universidad[]', $postgrado->universidad, ['class' => 'form-control', 'placeholder' => 'Universidad*', 'required']) }}
+                                <label>Universidad</label>
+                                {{ Form::text('universidad[]', $postgrado->universidad, ['class' => 'form-control', 'placeholder' => 'Universidad']) }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Nombre de Postgrado o Especialidad*</label>
+                                <label>Nombre de Postgrado o Especialidad</label>
                                 {{ Form::text('nombre[]', $postgrado->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre de Postgrado o Especialidad']) }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Fecha de inicio*</label>
-                                {{ Form::date('fecha_ini[]', $postgrado->fecha_ini, ['class' => 'form-control', 'placeholder' => 'Fecha de inicio*', 'required']) }}
+                                <label>Fecha de inicio</label>
+                                {{ Form::date('fecha_ini[]', $postgrado->fecha_ini, ['class' => 'form-control', 'placeholder' => 'Fecha de inicio*']) }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Fecha de conclusión*</label>
-                                {{ Form::date('fecha_fin[]', $postgrado->fecha_fin, ['class' => 'form-control', 'placeholder' => 'Fecha de conclusión*', 'required']) }}
+                                <label>Fecha de conclusión</label>
+                                {{ Form::date('fecha_fin[]', $postgrado->fecha_fin, ['class' => 'form-control', 'placeholder' => 'Fecha de conclusión*']) }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Tipo de curso*</label>
-                                {{ Form::select('tipo[]', ['' => 'SELECIONAR TIPO', 'POSTGRADO' => 'POSTGRADO', 'ESPECIALIDAD' => 'ESPECIALIDAD'], $postgrado->tipo, ['class' => 'form-control', 'required']) }}
+                                <label>Tipo de curso</label>
+                                {{ Form::select('tipo[]', ['' => 'SELECIONAR TIPO', 'POSTGRADO' => 'POSTGRADO', 'ESPECIALIDAD' => 'ESPECIALIDAD'], $postgrado->tipo, ['class' => 'form-control']) }}
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -271,7 +271,7 @@
                     </div>
                 @endforeach
             @else
-                <div class="titulo" data-id="0">
+                {{-- <div class="titulo" data-id="0">
                     <input type="hidden" value="0" name="id_postgrados[]" />
                     <div class="col-md-12 contenedor_quitar postgrado">
                         <button type="button" class="btn btn-danger btn-sam quitar"><i
@@ -279,47 +279,47 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>País*</label>
-                            {{ Form::text('pais[]', null, ['class' => 'form-control', 'placeholder' => 'País*', 'required']) }}
+                            <label>País</label>
+                            {{ Form::text('pais[]', null, ['class' => 'form-control', 'placeholder' => 'País']) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Universidad*</label>
-                            {{ Form::text('universidad[]', null, ['class' => 'form-control', 'placeholder' => 'Universidad*', 'required']) }}
+                            <label>Universidad</label>
+                            {{ Form::text('universidad[]', null, ['class' => 'form-control', 'placeholder' => 'Universidad']) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Nombre de Postgrado o Especialidad*</label>
+                            <label>Nombre de Postgrado o Especialidad</label>
                             {{ Form::text('nombre[]', null, ['class' => 'form-control', 'placeholder' => 'Nombre de Postgrado o Especialidad']) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Fecha de inicio*</label>
-                            {{ Form::date('fecha_ini[]', null, ['class' => 'form-control', 'placeholder' => 'Fecha de inicio*', 'required']) }}
+                            <label>Fecha de inicio</label>
+                            {{ Form::date('fecha_ini[]', null, ['class' => 'form-control', 'placeholder' => 'Fecha de inicio*']) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Fecha de conclusión*</label>
-                            {{ Form::date('fecha_fin[]', null, ['class' => 'form-control', 'placeholder' => 'Fecha de conclusión*', 'required']) }}
+                            <label>Fecha de conclusión</label>
+                            {{ Form::date('fecha_fin[]', null, ['class' => 'form-control', 'placeholder' => 'Fecha de conclusión*']) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Tipo de curso*</label>
-                            {{ Form::select('tipo[]', ['' => 'SELECIONAR TIPO', 'POSTGRADO' => 'POSTGRADO', 'ESPECIALIDAD' => 'ESPECIALIDAD'], null, ['class' => 'form-control', 'required']) }}
+                            <label>Tipo de curso</label>
+                            {{ Form::select('tipo[]', ['' => 'SELECIONAR TIPO', 'POSTGRADO' => 'POSTGRADO', 'ESPECIALIDAD' => 'ESPECIALIDAD'], null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Subir diploma*</label>
-                            <input type="file" name="input_diploma[]" class="form-control" required>
+                            <label>Subir diploma</label>
+                            <input type="file" name="input_diploma[]" class="form-control">
                         </div>
                     </div>
-                </div>
+                </div> --}}
             @endif
             <div id="eliminados"></div>
             <div id="eliminados_postgrados"></div>

@@ -548,16 +548,16 @@
                 }
             });
 
-            let requeridos_postgrados = $("#contenedor_postgrados").find('[required]');
-            requeridos_postgrados.each(function(index) {
-                if ($(this).val() == "" || !$(this).val()) {
-                    sw_envia = false;
-                    errores.push($(this).attr("name"));
-                    $(this).addClass("invalid");
-                } else {
-                    $(this).removeClass("invalid");
-                }
-            });
+            // let requeridos_postgrados = $("#contenedor_postgrados").find('[required]');
+            // requeridos_postgrados.each(function(index) {
+            //     if ($(this).val() == "" || !$(this).val()) {
+            //         sw_envia = false;
+            //         errores.push($(this).attr("name"));
+            //         $(this).addClass("invalid");
+            //     } else {
+            //         $(this).removeClass("invalid");
+            //     }
+            // });
 
             console.log(errores);
         }

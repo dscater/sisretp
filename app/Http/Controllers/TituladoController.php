@@ -106,29 +106,31 @@ class TituladoController extends Controller
         }
 
         // REGISTRAR POSTGRADOS
-        $pais = $request->pais;
-        $universidad = $request->universidad;
-        $nombre = $request->nombre;
-        $fecha_ini = $request->fecha_ini;
-        $fecha_fin = $request->fecha_fin;
-        $tipo = $request->tipo;
-        for ($i = 0; $i < count($pais); $i++) {
-            $o_postgrado = $titulado->postgrados()->create(array_map('mb_strtoupper', [
-                "pais" => $pais[$i],
-                "universidad" => $universidad[$i],
-                "nombre" => $nombre[$i],
-                "fecha_ini" => $fecha_ini[$i],
-                "fecha_fin" => $fecha_fin[$i],
-                "tipo" => $tipo[$i],
-                "diploma" => "",
-            ]));
-            if ($request->hasFile("diploma" . $i)) {
-                $file_diploma = $request->file("diploma" . $i);
-                $extension = '.' . $file_diploma->getClientOriginalExtension();
-                $nombre_diploma = str_replace(' ', '_', "d" . $titulado->nom . $i) . time() . $extension;
-                $file_diploma->move(public_path() . '/files/titulos/', $nombre_diploma); //subir el diploma
-                $o_postgrado->diploma = $nombre_diploma;
-                $o_postgrado->save();
+        if (isset($request->pais) && isset($request->universidad) && isset($request->nombre) && isset($request->fecha_ini) && isset($request->fecha_fin) && count($request->pais) > 0 && count($request->universidad) > 0 && count($request->nombre) > 0 && count($request->fecha_ini) > 0 && count($request->fecha_fin) > 0) {
+            $pais = $request->pais;
+            $universidad = $request->universidad;
+            $nombre = $request->nombre;
+            $fecha_ini = $request->fecha_ini;
+            $fecha_fin = $request->fecha_fin;
+            $tipo = $request->tipo;
+            for ($i = 0; $i < count($pais); $i++) {
+                $o_postgrado = $titulado->postgrados()->create(array_map('mb_strtoupper', [
+                    "pais" => $pais[$i],
+                    "universidad" => $universidad[$i],
+                    "nombre" => $nombre[$i],
+                    "fecha_ini" => $fecha_ini[$i],
+                    "fecha_fin" => $fecha_fin[$i],
+                    "tipo" => $tipo[$i],
+                    "diploma" => "",
+                ]));
+                if ($request->hasFile("diploma" . $i)) {
+                    $file_diploma = $request->file("diploma" . $i);
+                    $extension = '.' . $file_diploma->getClientOriginalExtension();
+                    $nombre_diploma = str_replace(' ', '_', "d" . $titulado->nom . $i) . time() . $extension;
+                    $file_diploma->move(public_path() . '/files/titulos/', $nombre_diploma); //subir el diploma
+                    $o_postgrado->diploma = $nombre_diploma;
+                    $o_postgrado->save();
+                }
             }
         }
         return response()->JSON([
@@ -243,55 +245,57 @@ class TituladoController extends Controller
         }
 
         // ACTUALIZAR POSTGRADOS
-        $id_postgrados = $request->id_postgrados;
-        $pais = $request->pais;
-        $universidad = $request->universidad;
-        $nombre = $request->nombre;
-        $fecha_ini = $request->fecha_ini;
-        $fecha_fin = $request->fecha_fin;
-        $tipo = $request->tipo;
-        for ($i = 0; $i < count($id_postgrados); $i++) {
-            if ($id_postgrados[$i] == 0) {
-                $o_postgrado = $titulado->postgrados()->create(array_map('mb_strtoupper', [
-                    "pais" => $pais[$i],
-                    "universidad" => $universidad[$i],
-                    "nombre" => $nombre[$i],
-                    "fecha_ini" => $fecha_ini[$i],
-                    "fecha_fin" => $fecha_fin[$i],
-                    "tipo" => $tipo[$i],
-                    "diploma" => "",
-                ]));
-                if ($request->hasFile("diploma" . $i)) {
-                    $file_diploma = $request->file("diploma" . $i);
-                    $extension = '.' . $file_diploma->getClientOriginalExtension();
-                    $nombre_diploma = str_replace(' ', '_', "d" . $titulado->nom . $i) . time() . $extension;
-                    $file_diploma->move(public_path() . '/files/titulos/', $nombre_diploma); //subir el diploma
-                    $o_postgrado->diploma = $nombre_diploma;
-                    $o_postgrado->save();
-                }
-            } else {
-                $o_postgrado = Postgrado::find($id_postgrados[$i]);
-                $o_postgrado->update(array_map('mb_strtoupper', [
-                    "pais" => $pais[$i],
-                    "universidad" => $universidad[$i],
-                    "nombre" => $nombre[$i],
-                    "fecha_ini" => $fecha_ini[$i],
-                    "fecha_fin" => $fecha_fin[$i],
-                    "tipo" => $tipo[$i],
-                ]));
-                if ($request->hasFile("diploma" . $i)) {
-                    $diploma_antiguo = $o_postgrado->diploma;
-                    \File::delete(public_path() . '/files/titulos/' . $diploma_antiguo);
-                    $file_diploma = $request->file("diploma" . $i);
-                    // Log::debug("index " . $i);
-                    // Log::debug("archivo " . $file_diploma->getClientOriginalName());
-                    // Log::debug("id " . $id_postgrados[$i]);
-                    // Log::debug("ID ->" . $o_postgrado->id);
-                    $extension = '.' . $file_diploma->getClientOriginalExtension();
-                    $nombre_diploma = str_replace(' ', '_', "d" . $titulado->nom . $i) . time() . $extension;
-                    $file_diploma->move(public_path() . '/files/titulos/', $nombre_diploma); //subir el diploma
-                    $o_postgrado->diploma = $nombre_diploma;
-                    $o_postgrado->save();
+        if (isset($request->pais) && isset($request->universidad) && isset($request->nombre) && isset($request->fecha_ini) && isset($request->fecha_fin) && count($request->pais) > 0 && count($request->universidad) > 0 && count($request->nombre) > 0 && count($request->fecha_ini) > 0 && count($request->fecha_fin) > 0) {
+            $id_postgrados = $request->id_postgrados;
+            $pais = $request->pais;
+            $universidad = $request->universidad;
+            $nombre = $request->nombre;
+            $fecha_ini = $request->fecha_ini;
+            $fecha_fin = $request->fecha_fin;
+            $tipo = $request->tipo;
+            for ($i = 0; $i < count($id_postgrados); $i++) {
+                if (isset($id_postgrados[$i]) && $id_postgrados[$i] == 0) {
+                    $o_postgrado = $titulado->postgrados()->create(array_map('mb_strtoupper', [
+                        "pais" => $pais[$i],
+                        "universidad" => $universidad[$i],
+                        "nombre" => $nombre[$i],
+                        "fecha_ini" => $fecha_ini[$i],
+                        "fecha_fin" => $fecha_fin[$i],
+                        "tipo" => $tipo[$i],
+                        "diploma" => "",
+                    ]));
+                    if ($request->hasFile("diploma" . $i)) {
+                        $file_diploma = $request->file("diploma" . $i);
+                        $extension = '.' . $file_diploma->getClientOriginalExtension();
+                        $nombre_diploma = str_replace(' ', '_', "d" . $titulado->nom . $i) . time() . $extension;
+                        $file_diploma->move(public_path() . '/files/titulos/', $nombre_diploma); //subir el diploma
+                        $o_postgrado->diploma = $nombre_diploma;
+                        $o_postgrado->save();
+                    }
+                } else {
+                    $o_postgrado = Postgrado::find($id_postgrados[$i]);
+                    $o_postgrado->update(array_map('mb_strtoupper', [
+                        "pais" => $pais[$i],
+                        "universidad" => $universidad[$i],
+                        "nombre" => $nombre[$i],
+                        "fecha_ini" => $fecha_ini[$i],
+                        "fecha_fin" => $fecha_fin[$i],
+                        "tipo" => $tipo[$i],
+                    ]));
+                    if ($request->hasFile("diploma" . $i)) {
+                        $diploma_antiguo = $o_postgrado->diploma;
+                        \File::delete(public_path() . '/files/titulos/' . $diploma_antiguo);
+                        $file_diploma = $request->file("diploma" . $i);
+                        // Log::debug("index " . $i);
+                        // Log::debug("archivo " . $file_diploma->getClientOriginalName());
+                        // Log::debug("id " . $id_postgrados[$i]);
+                        // Log::debug("ID ->" . $o_postgrado->id);
+                        $extension = '.' . $file_diploma->getClientOriginalExtension();
+                        $nombre_diploma = str_replace(' ', '_', "d" . $titulado->nom . $i) . time() . $extension;
+                        $file_diploma->move(public_path() . '/files/titulos/', $nombre_diploma); //subir el diploma
+                        $o_postgrado->diploma = $nombre_diploma;
+                        $o_postgrado->save();
+                    }
                 }
             }
         }
