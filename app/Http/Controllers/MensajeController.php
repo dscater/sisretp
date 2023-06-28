@@ -36,7 +36,7 @@ class MensajeController extends Controller
             'email' => $user->email
         ];
         Mail::send('mails.mensaje_empleador',$request->all(),function($msj) use($usuarios){
-            $msj->from($usuarios['emisor']['email'], mb_strtoupper($usuarios['emisor']['nombre']));
+            $msj->from("factura@webfactu.com", mb_strtoupper($usuarios['emisor']['nombre']));
             if(Auth::user()->tipo == 'EMPLEADOR')
             {
                 $msj->subject($usuarios['emisor']['asunto']);
